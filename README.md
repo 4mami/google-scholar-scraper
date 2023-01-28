@@ -1,6 +1,6 @@
 # google-scholar-scraper
 ## What is this?
-- Google Scholarの検索結果をCSVファイルに保存するためのツールです。本ツールはSerpApiを利用しているため、使用にはSerpApiのAPIキーが必要です。
+- Google Scholarの検索結果をCSVファイルに保存するためのツールです。本ツールは[SerpApi](https://serpapi.com/google-scholar-api)を利用しているため、使用にはSerpApiのAPIキーが必要です。
 ## Getting Started
 1. `scrape.py`と同じ階層に、APIキーを以下のフォーマットで記載した`.env`ファイルを保存してください。
     - ```bash

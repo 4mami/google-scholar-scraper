@@ -81,12 +81,13 @@ def get_article_results(inputs, is_interactive=False):
             versions_total = result.get("inline_links", {}).get("versions", {}).get("total", 0)
             versions_link = result.get("inline_links", {}).get("versions", {}).get("link")
 
+            year_lis = re.findall(r"\d\d\d\d", publication_info_summary)
             publications.append({
                 "page_number": results.get("serpapi_pagination", {}).get("current", 1),
                 "position": position + 1,
                 "title": title,
                 "url": link,
-                "year": int(re.search(r"\d\d\d\d", publication_info_summary).group()) if re.search(r"\d\d\d\d", publication_info_summary) else 0,
+                "year": int(year_lis[-1]) if year_lis else 0,
                 "publication_info": publication_info_summary,
                 "snippet": snippet,
                 "pdf_url": resources_link,
