@@ -86,15 +86,15 @@ def get_article_results(inputs):
                 "position": position + 1,
                 "title": title,
                 "url": link,
-                "year": int(re.match(r"\d\d\d\d", publication_info_summary).group()) if re.match(r"\d\d\d\d", publication_info_summary) else 0,
+                "year": int(re.search(r"\d\d\d\d", publication_info_summary).group()) if re.search(r"\d\d\d\d", publication_info_summary) else 0,
                 "publication_info": publication_info_summary,
                 "snippet": snippet,
                 "pdf_url": resources_link,
-                "result_id": result_id,
                 "cited_num": cited_by_total,
                 "cites_id": cited_by_cites_id,
                 "version_num": versions_total,
-                "versions_url": versions_link
+                "versions_url": versions_link,
+                "result_id": result_id
                 })
 
         if "next" in results.get("serpapi_pagination", {}):
