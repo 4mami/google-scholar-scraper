@@ -113,6 +113,8 @@ def save_article_results_to_csv(article_results, params, total_results):
     else:
         csv_file = f"outputs/cites({params['cites']})_total({len(article_results)}-{total_results}).csv"
 
+    if not os.path.isdir("outputs"):
+        os.mkdir("outputs")
     pd.DataFrame(data=article_results).to_csv(csv_file, encoding="utf-8", index=False)
     print("Article results Saved.")
 
