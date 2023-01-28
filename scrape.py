@@ -39,7 +39,7 @@ def get_api_key():
         sys.exit(1)
     return config["SERPAPI_KEY"]
 
-def get_article_results(inputs):
+def get_article_results(inputs, is_interactive=False):
     if "q" not in inputs and "cites" not in inputs:
         print("[Error] No query and no cites_id")
         sys.exit(1)
@@ -99,6 +99,10 @@ def get_article_results(inputs):
 
         if "next" in results.get("serpapi_pagination", {}):
             # splits URL in parts as a dict and passes it to a GoogleSearch() class.
+            if is_interactive:
+                print(f"Want to stop? ({len(publications)}/{total_results}): [yes/no]")
+                if input().strip() == "yes":
+                    break
             search.params_dict.update(dict(parse_qsl(urlsplit(results["serpapi_pagination"]["next"]).query)))
         else:
             publications_is_present = False
@@ -120,7 +124,11 @@ def save_article_results_to_csv(article_results, params, total_results):
 
 def main():
     inputs = get_inputs()
-    publications, params, total_results = get_article_results(inputs)
+    args = sys.argv
+    if len(args) > 1 and args[1] == "-i":
+        publications, params, total_results = get_article_results(inputs, True)
+    else:
+        publications, params, total_results = get_article_results(inputs)
     save_article_results_to_csv(publications, params, total_results)
 
 if __name__ == '__main__':
