@@ -107,11 +107,12 @@ def get_article_results(inputs):
 def save_article_results_to_csv(article_results, params, total_results):
     csv_file = ""
     if "q" in params and "cites" in params:
-        csv_file = f"outputs/cites({params['cites']})_query({params['q']})_total({total_results}).csv"
+        csv_file = f"outputs/cites({params['cites']})_query({params['q']})_total({len(article_results)}-{total_results}).csv"
     elif "cites" not in params:
-        csv_file = f"outputs/query({params['q']})_total({total_results}).csv"
+        csv_file = f"outputs/query({params['q']})_total({len(article_results)}-{total_results}).csv"
     else:
-        csv_file = f"outputs/cites({params['cites']})_total({total_results}).csv"
+        csv_file = f"outputs/cites({params['cites']})_total({len(article_results)}-{total_results}).csv"
+
     pd.DataFrame(data=article_results).to_csv(csv_file, encoding="utf-8", index=False)
     print("Article results Saved.")
 
