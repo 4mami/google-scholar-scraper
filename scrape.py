@@ -100,9 +100,12 @@ def get_article_results(inputs, is_interactive=False):
         if "next" in results.get("serpapi_pagination", {}):
             # splits URL in parts as a dict and passes it to a GoogleSearch() class.
             if is_interactive:
-                print(f"Want to stop? ({len(publications)}/{total_results}): [yes/no]")
-                if input().strip() == "yes":
+                print(f"Want to stop? ({len(publications)}/{total_results}): [yes/no/all]")
+                ans = input().strip()
+                if ans == "yes":
                     break
+                elif ans == "all":
+                    is_interactive = False
             search.params_dict.update(dict(parse_qsl(urlsplit(results["serpapi_pagination"]["next"]).query)))
         else:
             publications_is_present = False
