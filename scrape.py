@@ -78,6 +78,7 @@ def get_article_results(inputs, is_interactive=False):
             resources_link = result["resources"][0].get("link") if "resources" in result else None
             cited_by_total = result.get("inline_links", {}).get("cited_by", {}).get("total", 0)
             cited_by_cites_id = result.get("inline_links", {}).get("cited_by", {}).get("cites_id")
+            cited_by_link = result.get("inline_links", {}).get("cited_by", {}).get("link")
             versions_total = result.get("inline_links", {}).get("versions", {}).get("total", 0)
             versions_link = result.get("inline_links", {}).get("versions", {}).get("link")
 
@@ -93,6 +94,7 @@ def get_article_results(inputs, is_interactive=False):
                 "pdf_url": resources_link,
                 "cited_num": cited_by_total,
                 "cites_id": cited_by_cites_id,
+                "cites_url": cited_by_link,
                 "version_num": versions_total,
                 "versions_url": versions_link,
                 "result_id": result_id
