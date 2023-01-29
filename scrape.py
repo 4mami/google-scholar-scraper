@@ -120,7 +120,7 @@ def get_article_results(inputs, is_interactive=False):
                     except Exception as e:
                         print(f"[Warn ] Go to next 20 articles because typed count is wrong: {e}")
                     else:
-                        lim = tmp_n + counter
+                        lim = tmp_n + 1 + counter
                         is_interactive = False
 
             search.params_dict.update(dict(parse_qsl(urlsplit(results["serpapi_pagination"]["next"]).query)))
