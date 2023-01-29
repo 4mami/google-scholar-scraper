@@ -57,7 +57,9 @@ def get_article_results(inputs, is_interactive=False):
     publications = []
     publications_is_present = True
     total_results = ""
-    while publications_is_present:
+    counter = 0
+    lim = float("inf")
+    while publications_is_present and counter < lim:
         results = search.get_dict()
         if "error" in results:
             if not publications:
@@ -103,15 +105,28 @@ def get_article_results(inputs, is_interactive=False):
         if "next" in results.get("serpapi_pagination", {}):
             # splits URL in parts as a dict and passes it to a GoogleSearch() class.
             if is_interactive:
-                print(f"Want to stop? ({len(publications)}/{total_results}): [yes/no/all]")
+                print(f"Want to stop? ({len(publications)}/{total_results}): [yes/no/all/x (remaining count)]")
                 ans = input().strip()
                 if ans == "yes":
                     break
                 elif ans == "all":
                     is_interactive = False
+                elif not ans or ans == "no":
+                    pass
+                else:
+                    tmp_n = -1
+                    try:
+                        tmp_n = int(ans)
+                    except Exception as e:
+                        print(f"[Warn ] Go to next 20 articles because typed count is wrong: {e}")
+                    else:
+                        lim = tmp_n + counter
+                        is_interactive = False
+
             search.params_dict.update(dict(parse_qsl(urlsplit(results["serpapi_pagination"]["next"]).query)))
         else:
             publications_is_present = False
+        counter += 1
     return publications, params, total_results
 
 def save_article_results_to_csv(article_results, params, total_results):
