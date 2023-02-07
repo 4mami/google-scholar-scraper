@@ -10,7 +10,7 @@
     - `pip install pandas google-search-results python-dotenv`
 3. `scrape.py`を実行してください。20件ごとに取得を続けるかを選びたい場合は、`-i`オプションを付けて実行してください。
     - `python scrape.py` or `python scrape.py -i`
-4. 検索クエリ、cites_id（特定の論文を引用している論文を検索したい場合）、検索対象期間の開始年、終了年を入力してください。指定しない場合は、Enterキーのみを押してください。以下は入力例です。
+4. 検索クエリ、引用検索したい論文のcites_id（特定の論文を引用している論文を検索したい場合）、検索対象期間の開始年、終了年を入力してください。指定しない場合は、Enterキーのみを押してください。以下は入力例です。
     - ```bash
       Type the query (optional if you want to specify "cites_id"):
       entity "linking" -quality author:a source:"ACL" OR source:"IEEE"
@@ -31,3 +31,8 @@
       1,4,Modelling project management and innovation competences for technology enhanced learning,https://ieeexplore.ieee.org/abstract/document/5756500/,2010,"SA Petersen, T Heikura - eChallenges e-2010 Conference, 2010 - ieeexplore.ieee.org","… The model is a step towards linking competence management to learning content. This … Using ideas from entity relationship modelling [16], we tried to identify how one competence may …",https://ieeexplore.ieee.org/iel5/5583931/5592106/05592523.pdf,15,7398039285246603700,"https://scholar.google.com/scholar?cites=7398039285246603700&as_sdt=2005&sciodt=0,5&hl=en&num=20",4,"https://scholar.google.com/scholar?cluster=7398039285246603700&hl=en&lr=lang_en%7Clang_ja&num=20&as_sdt=2005&sciodt=0,5&as_ylo=2010&as_yhi=2020",tDGCj4gdq2YJ
       1,5,From business functions to control functions: Transforming REA to ISA-95,https://ieeexplore.ieee.org/abstract/document/7264713/,2015,"A Mazak, C Huemer - 2015 IEEE 17th Conference on Business …, 2015 - ieeexplore.ieee.org",… entities and as such they are not described in the functional enterprise control model. These entities … REA does not provide any language concepts for linking identified tasks with agents…,https://www.academia.edu/download/38173551/CBI_2015_final_Mazak-Huemer.pdf,13,12823586430930390062,"https://scholar.google.com/scholar?cites=12823586430930390062&as_sdt=2005&sciodt=0,5&hl=en&num=20",8,"https://scholar.google.com/scholar?cluster=12823586430930390062&hl=en&lr=lang_en%7Clang_ja&num=20&as_sdt=2005&sciodt=0,5&as_ylo=2010&as_yhi=2020",LgwgquqH9rEJ
       ```
+    - cited_num：その論文の被引用数
+    - cites_id：その論文を引用している論文を検索する際に必要なID。`https://scholar.google.co.jp/scholar?cites=2960712678066186980&as_sdt=2005&sciodt=0,5&hl=ja`のような引用検索結果URL内の`cites`パラメータの値（`2960712678066186980`）と同じ
+    - cites_url：その論文を引用している論文をGoogle Scholarで検索するためのURL
+    - version_num：その論文のバージョン数
+    - versions_url：その論文の全バージョンをGoogle Scholarで検索するためのURL
